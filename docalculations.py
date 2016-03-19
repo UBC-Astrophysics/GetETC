@@ -22,16 +22,22 @@ F555Wsnr=0*mass
 F814Wsnr=0*mass
 CLEARsnr=0*mass
 for i in range(len(F475Xsnr)):
+    # calculate SNR for our central field portion with F475X
     data=uviswfc3etc.constructdata('F475X','WFC3/UVIS/F336W',F336W[i],0.04,600)
     data["fbpgsfile"]=sptype[i]
     F475Xsnr[i]=uviswfc3etc.place_uviswfc3_request(data)
-    data=acsetc.constructdata('F555W','CLEAR2S','WFC3/UVIS/F336W',F336W[i],0.04,600)
+    # calculate SNR for Gilliland field portion with F555W
+    data=acsetc.constructdata('F555W','CLEAR2S','WFC3/UVIS/F336W',F336W[i],0.04,160)
     data["fbpgsfile"]=sptype[i]
     F555Wsnr[i]=acsetc.place_acs_request(data)
     data["wfcfilt0"]="CLEAR1S"
-    CLEARsnr[i]=acsetc.place_acs_request(data)
     data["wfcfilt1"]="F814W"
+    # calculate SNR for Gilliland field portion with F814W
     F814Wsnr[i]=acsetc.place_acs_request(data)
+    # calculate SNR for our ACS field portion with CLEAR/CLEAR
+    data["Time"]="600"
+    data["wfcfilt1"]="CLEAR2S"
+    CLEARsnr[i]=acsetc.place_acs_request(data)
 
 
 print("#  1: mass    2 : Teff      3: F336W      4: F555W      5: logG       6: logR        7: F475Xsnr     8: F555Wsnr     9: F814Wsnr     10: CLEARsnr     11: spType"  )
