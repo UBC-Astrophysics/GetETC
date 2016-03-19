@@ -1,0 +1,1827 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>wfc3uvis imaging ETC</title>
+    <link rel="stylesheet" href="/etcstatic/style.css" type="text/css">
+<script language="javascript" type="text/javascript" src="/etcstatic/validate_general.3.js">
+</script>
+</head>
+
+
+<body onload="validate_all()">
+
+
+<!--
+
+This page contains four <div>s named:
+	header - top of page
+	test_marker - a banner that appears near the top when in test mode
+	navigation - sidebar on left
+	content - principal material to be displayed
+	footer - bottom of page
+The position of the divs is controlled by the style sheet in /etcstatic/style.css
+
+-->
+
+<div id="header">
+
+
+    <a href="/etc"><img ALT="Hubble Space Telescope" SRC="/etcstatic/images/HSTBlackTitle.jpg" style="border-style: none"></a>
+
+    
+    <img ALT="" SRC="/etcstatic/images/wfc3uvis_head.jpg">
+    
+
+
+
+    <h2>Exposure Time Calculator</h2>
+
+
+</div>
+
+
+
+
+
+<div id="analytics">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49428647-1', 'stsci.edu');
+  ga('send', 'pageview');
+
+</script>
+
+</div>
+
+
+<div id="navigation" style='float: left; background-color: #66ff66;'>
+<h2>
+
+ETC Version 24.1
+
+</h2>
+    <ul>
+	<li> pyetc 1.10
+	<li> pysynphot 0.9.8.2.dev
+	<li> cdbs trds.24.1.rc1
+    </ul>
+    
+<h2>ETC Help</h2>
+    <ul>
+        <li><a href="/etcstatic/users_guide/index.html">User's Guide
+	</a></li>
+<li><a href="/etcstatic/users_guide/release_notes.html">Release Notes </a></li>
+        <li><a
+	href="http://www.stsci.edu/hst/observatory/etcs/release_notes"> ETC News and Known Issues       </a></li>
+        <li><a
+	href="/etcstatic/users_guide/1_ref_2_spectral_distribution.html#spectral-distributions"> Model Spectra  </a></li>
+
+    </ul>
+
+
+
+	
+		
+	<h2>ACS ETCs</h2>
+	    <ul>
+
+		<li><a href="/etc/input/acs/imaging"> 		Imaging			</a></li>
+
+		<li><a href="/etc/input/acs/spectroscopic"> 	Spectroscopy    </a>
+			</li>
+
+		<li><a href="/etc/input/acs/rampfilter"> 		Ramp Filter	 </a> </li>
+
+
+	    </ul>
+
+	<h2>COS ETCs</h2>
+	    <ul>
+
+		<li><a href="/etc/input/cos/spectroscopic"> 	Spectroscopy		</a></li>
+
+		<li><a href="/etc/input/cos/spectroscopicacq"> 	Spectroscopy Target Acquisition</a>
+				</li>
+
+		<li><a href="/etc/input/cos/imaging"> 		Imaging			</a> </li>
+
+		<li> <a href="/etc/input/cos/targetacquisition">Imaging Target Acquisition </a> </li>
+
+		<li><a href="http://www.stsci.edu/hst/cos/software/etc_help">	COS Team ETC Help and Release Notes </a></li>
+
+	    </ul>
+
+
+	<h2>STIS ETCs</h2>
+	    <ul>
+
+		<li><a href="/etc/input/stis/imaging">	Imaging			</a> </li>
+
+		<li><a href="/etc/input/stis/spectroscopic">	Spectroscopy		</a> </li>
+
+		<li><a href="/etc/input/stis/targetacquisition">	Target Acquisition	</a>  </li>
+
+	    </ul>
+
+	<h2>WFC3 ETCs</h2>
+	    <ul>
+            <li> IR </li>
+            <ul>
+                <li> Imaging </li>
+                <ul>
+                    <li><a href="/etc/input/wfc3ir/imaging"> Stare </a></li>
+                    <li><a href="/etc/input/wfc3ir/scimaging"> Scan </a></li>
+                </ul>
+                <li> Spectroscopy </li>
+                <ul>
+                    <li><a href="/etc/input/wfc3ir/spectroscopic"> Stare </a></li>
+                    <li><a href="/etc/input/wfc3ir/scspectroscopic"> Scan </a></li>
+                </ul>
+           </ul>
+            <li> UVIS </li>
+            <ul>
+                <li> Imaging </li>
+                <ul>
+                    <li><a href="/etc/input/wfc3uvis/imaging"> Stare </a></li>
+                    <li><a href="/etc/input/wfc3uvis/scimaging"> Scan </a></li>
+                </ul>
+                <li> Spectroscopy </li>
+                <ul>
+            		<li><a href="/etc/input/wfc3uvis/spectroscopic"> Stare </a></li>
+                </ul>
+           </ul>
+	    </ul>
+
+	
+
+	
+
+ 
+
+<h2>Previous results</h2>
+    <ul>
+        <li> <a href="/etc/results"> 			Previous calculation results </a> </li>
+    </ul>
+
+</div>
+
+
+<div id="content">
+
+
+    <h1>WFC3 UVIS Imaging ETC</h1>
+
+
+    <p>
+        This form will calculate the count rates and S/N ratio for a simulated
+        spectrum of ONE source in a WFC3 UVIS imaging observation.
+    </p>
+
+    <p>
+    For
+    <a HREF="/etc/help/index">general help</a> on how to use this
+    Exposure Time Calculator or for help on various topics, click on the
+    appropriate highlighted words. <br>
+
+    <b>Please ensure that you have read the current <a HREF="http://etc.stsci.edu/etcstatic/users_guide/release_notes.html"> release notes </a> and <a HREF="http://www.stsci.edu/hst/observatory/etcs/release_notes"> recent news </a> before submitting any ETC calculations.  </b>
+
+</p>
+
+
+    <!-- Form begins here.  -->
+
+        <form name="theform" enctype="multipart/form-data" METHOD="POST" ACTION="/etc/calculate/wfc3uvis/imaging" onsubmit='do_submit()' onreset="validate_all()">
+
+
+<!--  Submit/Reset buttons -->
+
+<script type="text/javascript">
+	document.write('<p> <input TYPE="button" value="Submit Simulation" onclick="do_submit()"> <input type="button" value="Reset All Parameters" onclick="do_reset()"> </p>');
+</script>
+<noscript> 
+	<p>
+	<!-- non-javascript here -->
+	<input TYPE="Submit" value="Submit Simulation">
+	<input type="Reset" value="Reset All Parameters">
+	</p>
+</noscript>
+
+
+
+
+
+
+        <!--  Question 1 -->
+
+        <p>
+        <h3>1. Select <a
+        HREF="/etc/help/wfc3Filters#wfc3-uvis-filters-and-grism" target="_etcHelp">Filter</a>: </h3>
+
+        <table>
+    <tr ALIGN="LEFT">
+        <td>
+            <input TYPE="radio" NAME="wfc3_filter_type" VALUE="wide" CHECKED id='wfc3_filter_type_wide'>
+                <label for='wfc3_filter_type_wide'>
+                Wide
+                </label>
+        </td>
+        <td>
+            <select NAME="wfc3_filter_w" onfocus="set_radio('wfc3_filter_type_wide')">
+                <option VALUE="F218W">F218W (ISM feature)
+                <option VALUE="F200LP">F200LP (Clear)
+                <option VALUE="F225W">F225W (UV)
+                <option VALUE="F275W">F275W (UV)
+                <option VALUE="F300X">F300X (Long Pass)
+                <option VALUE="F336W">F336W (U)
+                <option VALUE="F350LP">F350LP (Long Pass)
+                <option VALUE="F390W">F390W (Washington C)
+                <option VALUE="F438W">F438W (WFPC2 B)
+                <option VALUE="F475W">F475W (SDSS g)
+                <option VALUE="F475X">F475X (Long Pass)
+                <option VALUE="F555W" SELECTED>F555W (WFPC2 V)
+                <option VALUE="F600LP">F600LP (Long Pass)
+                <option VALUE="F606W">F606W (WFPC2 Wide V)
+                <option VALUE="F625W">F625W (SDSS r)
+                <option VALUE="F775W">F775W (SDSS i)
+                <option VALUE="F814W">F814W (WFPC2 Wide I)
+                <option VALUE="F850LP">F850LP (SDSS z)
+            </select>
+        </td>
+    </tr>
+
+    <tr ALIGN=LEFT>
+        <td>
+            <input TYPE="radio" NAME="wfc3_filter_type" VALUE="medium" id='wfc3_filter_type_medium'>
+                <label for='wfc3_filter_type_medium'>
+                Medium
+                </label>
+        </td>
+        <td>
+            <select NAME="wfc3_filter_m" onfocus="set_radio('wfc3_filter_type_medium')">
+                <option VALUE="F390M">F390M (Long Pass)
+                <option VALUE="F410M" SELECTED>F410M (Stromgren v)
+                <option VALUE="F467M">F467M (Stromgren b)
+                <option VALUE="F547M">F547M (Stromgren y)
+                <option VALUE="F621M">F621M (11&#37; passband)
+                <option VALUE="F689M">F689M (11&#37; passband)
+                <option VALUE="F763M">F763M (11&#37; passband)
+                <option VALUE="F845M">F845M (11&#37; passband)
+            </select>
+        </td>
+    </tr>
+
+    <tr ALIGN=LEFT>
+        <td>
+            <input TYPE="radio" name="wfc3_filter_type" value="narrow" id='wfc3_filter_type_narrow'>
+                <label for='wfc3_filter_type_narrow'>
+                Narrow
+                </label>
+        </td>
+
+        <td>
+            <select NAME="wfc3_filter_n" onfocus="set_radio('wfc3_filter_type_narrow')">
+                <option VALUE="F280N" SELECTED>F280N (MgII 2795/2802)
+                <option VALUE="F343N">F343N ([NeV] 3426)
+                <option VALUE="F373N">F373N ([OII] 3276/3729)
+                <option VALUE="F395N">F395N (CaII H&#38;K)
+                <option VALUE="F469N">F469N (HeII 4686)
+                <option VALUE="F487N">F487N (H&beta; 4861)
+                <option VALUE="F502N">F502N ([OIII] 5007)
+                <option VALUE="F631N">F631N ([OI] 6300)
+                <option VALUE="F645N">F645N (Continuum)
+                <option VALUE="F656N">F656N (H&alpha; 6563)
+                <option VALUE="F657N">F657N (Wide H&alpha; + [NII])
+                <option VALUE="F658N">F658N ([NII] 6583)
+                <option VALUE="F665N">F665N (Redshifted H&alpha; + [NII])
+                <option VALUE="F673N">F673N ([SII] 6717/6731)
+                <option VALUE="F680N">F680N (Redshifted H&alpha; + [NII])
+                <option VALUE="F953N">F953N ([SIII] 9532)
+            </select>
+        </td>
+    </tr>
+
+    <tr ALIGN=LEFT>
+        <td>
+            <input TYPE="radio" name="wfc3_filter_type" value="quad" id='wfc3_filter_type_quad'>
+                <label for='wfc3_filter_type_quad'>
+                Quad
+                </label>
+        </td>
+
+        <td>
+            <select NAME="wfc3_filter_q" onfocus="set_radio('wfc3_filter_type_quad')">
+                <option VALUE="FQ232N" SELECTED>FQ232N (CII] 2326)
+                <option VALUE="FQ243N">FQ243N ([NeIV] 2425)
+                <option VALUE="FQ378N">FQ378N (Redshifted [OII] 3727)
+                <option VALUE="FQ387N">FQ387N ([NeIII] 3868)
+                <option VALUE="FQ422M">FQ422M (Continuum)
+                <option VALUE="FQ436N">FQ436N (H-gamma + [OIII] 4363)
+                <option VALUE="FQ437N">FQ437N ([OIII] 4363)
+                <option VALUE="FQ492N">FQ492N (Redshifted H&beta;)
+                <option VALUE="FQ508N">FQ508N (Redshifted [OIII] 5007)
+                <option VALUE="FQ575N">FQ575N ([NII] 5754)
+                <option VALUE="FQ619N">FQ619N (CH<sub>4</sub> 6194)
+                <option VALUE="FQ634N">FQ634N (6194 continuum)
+                <option VALUE="FQ672N">FQ672N ([SII] 6717)
+                <option VALUE="FQ674N">FQ674N ([SII] 6731)
+                <option VALUE="FQ727N">FQ727N (CH<sub>4</sub> 7270)
+                <option VALUE="FQ750N">FQ750N (7270 continuum)
+                <option VALUE="FQ889N">FQ889N (CH4 25/km-agt)
+                <option VALUE="FQ906N">FQ906N (CH4 2.5/km-agt)
+                <option VALUE="FQ924N">FQ924N (CH4 0.25/km-agt)
+                <option VALUE="FQ937N">FQ937N (CH4 0.025/km-agt)
+            </select>
+        </td>
+    </tr>
+</table>
+
+
+        <p>
+Specify Additional CCD parameters:
+
+        <input TYPE="HIDDEN" NAME="gain" VALUE="1.5">
+
+<table BORDER="0" CELLPADDING="2" CELLSPACING="2">
+    <tr>
+        <th><a HREF="/etc/help/nrFrames" target="_etcHelp"># Frames</a></th>
+
+        <td>
+                <input NAME="crsplit" VALUE=1 SIZE=2  onchange="validate(this.form,event)" >
+                <span class="error" id="fe_crsplit"></span>
+        </td>
+
+        <td>
+            <a HREF="/etc/help/uvisChip" target="_etcHelp">Detector chip</a>
+            <select NAME="detector">
+            <option VALUE="uvis1"> 1
+            <option VALUE="uvis2" SELECTED> 2
+            </select>
+        </td>
+
+        
+        <td> 
+            Post Flash [e]
+            <input NAME="post_flash_wfc3" VALUE=0 SIZE=2 onchange="validate(this.form,event)"> 
+            <span class="error" id="fe_post_flash_wfc3"></span> 
+        </td> 
+        
+    </tr>
+</table>
+
+<script type="text/javascript">
+validatable_fields['crsplit']=validate_float;
+validatable_fields['post_flash_wfc3']=validate_int;
+</script>
+
+</p>
+
+
+        <!--  Question 2 -->
+
+        <p>
+
+        <h3>2. Specify the exposure parameters:</h3>
+
+        <script type="text/javascript">
+validatable_fields['SNR']=validate_float;
+validatable_fields['Time']=validate_float;
+</script>
+
+<input TYPE="RADIO" NAME="simmode" VALUE="Time" CHECKED id='simmode_Time'>
+<a href="/etc/help/time" target="_etcHelp">Exposure time</a> needed to obtain a S/N ratio of 
+
+<input NAME="SNR" VALUE="10.0" SIZE=6 onfocus='set_radio("simmode_Time")' onchange="validate(this.form,event)">
+	        <span class="error" id="fe_SNR"></span>
+
+
+<br>
+
+<input TYPE="RADIO" NAME="simmode" VALUE="SNR" id='simmode_SNR'>
+<a href="/etc/help/snr" target="_etcHelp">S/N ratio</a>
+reached in an exposure time of
+<input NAME="Time" VALUE="900" SIZE=6 onfocus='set_radio("simmode_SNR")' onchange="validate(this.form,event)"> seconds.
+	        <span class="error" id="fe_Time"></span>
+
+<p>
+
+        <p>
+            Select the source type and photometric region (centered on the target) that will be used for
+the S/N ratio calculation: <br>
+
+<table>
+    <tr>
+        <td>
+            <input TYPE="RADIO" NAME="fsourceType" VALUE="point" CHECKED id='fsourceType_point'>
+        </td>
+        <td>
+            <h4><label for='fsourceType_point'>Point Source</label></h4>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <input TYPE="RADIO" NAME="xRegionType" VALUE="default" CHECKED id='xRegionType_default' onfocus="set_radio('fsourceType_point')">
+                <label for='xRegionType_default'>
+                Use the default region for the camera selected, circle of radius 0.2 arcsec.
+                Please note that the current default aperture radius for WFC3/UVIS is 0.2 arcsec,
+                or 75% to 86% of the enclosed energy, depending on filter.
+                </label>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <input TYPE="RADIO" NAME="xRegionType" VALUE="Square" id='xRegionType_Square' onfocus="set_radio('fsourceType_point')">
+                <label for='xRegionType_Square'>
+                Use a square region of size (pixels):
+                </label>
+                <select NAME="extractionRegionSquare" onfocus="set_radio('xRegionType_Square'); set_radio('fsourceType_point')">
+                    <option VALUE="1"> 1x1
+                    <option VALUE="2"> 2x2
+                    <option VALUE="3"> 3x3
+                    <option VALUE="5" SELECTED> 5x5
+                    <option VALUE="7"> 7x7
+                    <option VALUE="9"> 9x9
+                    <option VALUE="11"> 11x11
+                    <option VALUE="13"> 13x13
+                    <option VALUE="15"> 15x15
+                    <option VALUE="17"> 17x17
+                    <option VALUE="19"> 19x19
+                    <option VALUE="21"> 21x21
+                    <option VALUE="23"> 23x23
+                    <option VALUE="25"> 25x25
+                    <option VALUE="51"> 51x51
+                    <option VALUE="101"> 101x101
+                </select>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <input TYPE="RADIO" NAME="xRegionType" VALUE="Circle" id='xRegionType_Circle' onfocus="set_radio('fsourceType_point')">
+            <label for='xRegionType_Circle'>
+            Use a standard sized circular region of radius (arcsec):
+            </label>
+                <select NAME="extractionRegionCircle" onfocus="set_radio('xRegionType_Circle'); set_radio('fsourceType_point')">
+                    <option VALUE="0.1">0.1
+                    <option VALUE="0.2" SELECTED >0.2
+                    <option VALUE="0.3">0.3
+                    <option VALUE="0.4">0.4
+                    <option VALUE="0.5">0.5
+                    <option VALUE="0.6">0.6
+                    <option VALUE="0.8">0.8
+                    <option VALUE="1.0">1.0
+                    <option VALUE="1.5">1.5
+                    <option VALUE="2.0">2.0
+                </select>
+        </td>
+    </tr>
+
+    <tr>
+        <td></td>
+        <td>
+            <input TYPE="RADIO" NAME="xRegionType" VALUE="UserCircle" id='xRegionType_UserCircle' onfocus="set_radio('fsourceType_point')">
+            <label for='xRegionType_UserCircle'>
+            Use an arbitrarily sized circular region of radius (arcsec):
+            </label>
+                <input NAME="extractionRegionUserCircle" VALUE="0.4" SIZE=5  onchange="validate(this.form,event)" onfocus="set_radio('xRegionType_UserCircle'); set_radio('fsourceType_point')">
+                <span class="error" id="fe_extractionRegionUserCircle"></span>
+
+        </td>
+    <tr>
+
+    <tr>
+        <td></td>
+        <td>
+            <input TYPE="RADIO" NAME="xRegionType" VALUE="VariableCircle" id='xRegionType_VariableCircle' onfocus="set_radio('fsourceType_point')">
+            <label for='xRegionType_VariableCircle'>
+            Use a circular region containing
+            </label>
+            <input NAME="extractionRegionVariableCircle" VALUE="80.0" SIZE=5  onchange="validate(this.form,event)" onfocus="set_radio('xRegionType_VariableCircle'); set_radio('fsourceType_point')">
+                 <span class="error" id="fe_extractionRegionVariableCircle"></span>
+            <label for='xRegionType_VariableCircle'>
+            percent of the total light.
+            <strong>The range of supported values for this option is limited.
+            The limits are determined by the PSF and target spectrum.</strong>
+            </label>
+        </td>
+    </tr>
+
+    <tr>
+    <td>
+        <input TYPE="RADIO" NAME="fsourceType" VALUE="extended" id='fsourceType_extended'>
+    </td>
+    <td>
+        <label for='fsourceType_extended'><b>Extended Source</b> with a diameter of  </label>
+        <input NAME="fdiameter" VALUE=8 SIZE=8 onfocus='set_radio("fsourceType_extended")'  onchange="validate(this.form,event)" >
+        <label for='fsourceType_extended'> arcsec </label>
+         <span class="error" id="fe_fdiameter"></span>
+    </td>
+</tr>
+
+<tr>
+    <td />
+    <td>
+        <input TYPE="RADIO" NAME="xRegionExtendedType" VALUE="Square" CHECKED id='xRegionExtendedType_Square' onfocus="set_radio('fsourceType_extended')">
+        <label for='xRegionExtendedType_Square'>
+        Use a square extraction region of size (pixels):
+        </label>
+        <select NAME="extractionRegionExtendedSquare" onfocus="set_radio('xRegionExtendedType_Square'); set_radio('fsourceType_extended')">
+            <option VALUE="1"> 1x1
+            <option VALUE="2"> 2x2
+            <option VALUE="3"> 3x3
+            <option VALUE="5" SELECTED> 5x5
+            <option VALUE="7"> 7x7
+            <option VALUE="9"> 9x9
+            <option VALUE="11"> 11x11
+            <option VALUE="13"> 13x13
+            <option VALUE="15"> 15x15
+            <option VALUE="17"> 17x17
+            <option VALUE="19"> 19x19
+            <option VALUE="21"> 21x21
+            <option VALUE="23"> 23x23
+            <option VALUE="25"> 25x25
+            <option VALUE="51"> 51x51
+            <option VALUE="101"> 101x101
+        </select>
+    </td>
+</tr>
+
+<tr>
+    <td>
+    </td>
+    <td>
+        <input TYPE="RADIO" NAME="xRegionExtendedType" VALUE="Circle" id='xRegionExtendedType_Circle' onfocus="set_radio('fsourceType_extended')">
+        <label for='xRegionExtendedType_Circle'>
+        Use a circular region of radius (arcsec):
+        </label>
+        <select NAME="extractionRegionExtendedCircle" onfocus="set_radio('xRegionExtendedType_Circle'); set_radio('fsourceType_extended')">
+            <option VALUE="0.1">0.1
+            <option VALUE="0.2">0.2
+            <option VALUE="0.3">0.3
+            <option VALUE="0.4" selected>0.4
+            <option VALUE="0.5">0.5
+            <option VALUE="0.6">0.6
+            <option VALUE="0.8">0.8
+            <option VALUE="1.0">1.0
+            <option VALUE="1.5">1.5
+            <option VALUE="2.0">2.0
+        </select>
+    </td>
+
+</tr>
+
+<tr>
+    <td />
+    <td>
+        <input TYPE="RADIO" NAME="xRegionExtendedType" VALUE="UserCircle" id='xRegionExtendedType_UserCircle' onfocus="set_radio('fsourceType_extended')">
+        <label for='xRegionExtendedType_UserCircle'>
+        Use an arbitrarily sized circular region of radius (arcsec):
+        </label>
+            <input NAME="extractionRegionExtendedUserCircle" VALUE="0.4" SIZE=5  onchange="validate(this.form,event)" onfocus="set_radio('xRegionExtendedType_UserCircle'); set_radio('fsourceType_extended')">
+                  <span class="error" id="fe_extractionRegionExtendedUserCircle"></span>
+    </td>
+</tr>
+
+<script type="text/javascript">
+validatable_fields['extractionRegionExtendedUserCircle']=validate_float_gt_0;
+validatable_fields['fdiameter']=validate_float_gt_0;
+</script>
+
+
+
+
+</table>
+
+
+<script type="text/javascript">
+validatable_fields['extractionRegionVariableCircle']=validate_float;
+validatable_fields['extractionRegionUserCircle']=validate_float;
+</script>
+
+
+        </p>
+
+            <!--  Question 3 -->
+
+        <p>
+        <h3>
+            3. Choose one of the following <a href="/etc/help/spectra" target="_etcHelp">
+            spectral distributions </a> for the source:
+        </h3>
+
+        <table>
+    <script type="text/javascript">
+
+
+// checks if empty spectrum is selected.
+
+function is_empty_spectrum(form)
+{
+    for (var n = 0; n < form.length; n++)
+        if (form.elements[n].name == 'fsorigin')
+            if ((form.elements[n].value == 'SpectrumEmpty') && (form.elements[n].checked))
+                return true;
+    return false;
+}
+
+
+// this is called by the 'onclick' tag in all buttons in the
+// button group, but the empty spectrum button. It's purpose is
+// to erase eventual error messages lingering in the ebv and
+// redshift fields. It's not an error to have ebv and/or
+// redshift with a non-empty spectrum.
+
+function set_nonempty_continuum(form)
+{
+    error_field('febv', '');
+    error_field('fRedshift', '');
+}
+
+
+// this is called by the 'onclick' tag in the empty spectrum
+// button. It checks both the ebv and redshift fields.
+
+function validate_continuum(form)
+{
+    validate_ebv(form);
+    validate_redshift(form);
+    return '';
+}
+
+
+// Validation of ebv field.
+
+function validate_ebv(form)
+{
+    s = validate_float(form, 'febv');
+    if ( s != '' )
+        return s;
+
+    febv_str = get_form_element(form, 'febv').value;
+    febv = parseFloat(febv_str);
+    is_empty = is_empty_spectrum(form);
+
+    if (is_empty && (febv != 0.0)) {
+        message = "Extinction cannot be applied because no continuum has been selected.";
+        error_field('febv', message);
+        return message;
+    }
+    return '';
+}
+
+
+// Validation of redshift field.
+
+function validate_redshift(form)
+{
+    s = validate_float(form, 'fRedshift');
+    if ( s != '' )
+        return s;
+
+    redshift_str = get_form_element(form, 'fRedshift').value;
+    redshift = parseFloat(redshift_str);
+    is_empty = is_empty_spectrum(form);
+
+    if (is_empty && (redshift != 0.0)) {
+        message = "Redshift cannot be applied because no continuum has been selected.";
+        error_field('fRedshift', message);
+        return message;
+    }
+    return '';
+}
+
+
+</script>
+
+
+    <tr>
+    <td colspan="2">
+        <strong>Please note: for User supplied and uploaded spectrum, please use only FITS or text (DAT) format
+            files.</strong>
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <input type="RADIO" name="fsorigin" value="SpectrumUpload" id='fsorigin_SpectrumUpload' onclick='set_nonempty_continuum(this.form)'>
+    </td>
+    <td>
+        <a HREF="/etc/help/userSuppliedSpectra" target="_etcHelp">Upload Spectrum File</a>:
+        <input type="file" name="fUploadFile" size="40" onfocus='set_radio("fsorigin_SpectrumUpload")' onchange='set_radio("fsorigin_SpectrumUpload")'>
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <input TYPE="RADIO" NAME="fsorigin" VALUE="SpectrumHstOther" id='fsorigin_SpectrumHstOther' onclick='set_nonempty_continuum(this.form)'>
+    </td>
+    <td>
+        <a HREF="/etc/help/otherHSTSpectra" target="_etcHelp">Other HST Spectrum</a>:<br>
+        <i>CDBS Synphot spectrum file</i>
+        <input NAME="fOtherFile" SIZE=50 onfocus='set_radio("fsorigin_SpectrumHstOther")'>
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <input TYPE="RADIO" NAME="fsorigin" value="SpectrumCK" id='fsorigin_SpectrumCK' onclick='set_nonempty_continuum(this.form)'>
+    </td>
+    <td>
+        <a HREF="/etc/help/ckSpectra" target="_etcHelp">Castelli and Kurucz Models</a>:
+        <select NAME="fSpectrumCK"  onfocus='set_radio("fsorigin_SpectrumCK")' >
+        <option value='O3V' SELECTED>O3V 45000 4.5
+        <option value='O5V'>O5V 41000 4.5
+        <option value='O7V'>O7V 37000 4.0
+        <option value='O9V'>O9V 33000 4.0
+        <option value='B0V'>B0V 30000 4.0
+        <option value='B1V'>B1V 25000 4.0
+        <option value='B3V'>B3V 19000 4.0
+        <option value='B5V'>B5V 15000 4.0
+        <option value='B8V'>B8V 12000 4.0
+        <option value='A0V'>A0V 9500 4.0
+        <option value='A1V'>A1V 9250 4.0
+        <option value='A3V'>A3V 8750 4.0
+        <option value='A5V'>A5V 8250 4.0
+        <option value='F0V'>F0V 7250 4.0
+        <option value='F2V'>F2V 7000 4.0
+        <option value='F5V'>F5V 6500 4.0
+        <option value='F8V'>F8V 6250 4.0
+        <option value='G0V'>G0V 6000 4.5
+        <option value='G2V'>G2V 5750 4.5
+        <option value='G8V'>G8V 5500 4.5
+        <option value='K0V'>K0V 5250 4.5
+        <option value='K2V'>K2V 4750 4.5
+        <option value='K5V'>K5V 4250 4.5
+        <option value='K7V'>K7V 4000 4.5
+        <option value='M0V'>M0V 3750 4.5
+        <option value='M2V'>M2V 3500 4.5
+        <option value='M6V'>M6V 3500 5.0
+        <option value='B0III'>B0III  29000 3.5
+        <option value='B5III'>B5III  15000 3.5
+        <option value='G0III'>G0III  5750 3.0
+        <option value='G5III'>G5III  5250 2.5
+        <option value='K0III'>K0III  4750 2.0
+        <option value='K5III'>K5III  4000 1.5
+        <option value='M0III'>M0III  3750 1.5
+        <option value='B0I'>B0I 26000 3.0
+        <option value='B5I'>B5I 14000 2.5
+        <option value='A0I'>A0I 9750 2.0
+        <option value='A5I'>A5I 8500 2.0
+        <option value='F0I'>F0I 7750 2.0
+        <option value='F5I'>F5I 7000 1.5
+        <option value='G0I'>G0I 5500 1.0
+        <option value='G5I'>G5I 4750 1.0
+        <option value='K0I'>K0I 4500 1.0
+        <option value='K5I'>K5I 3850 0.0
+        <option value='M0I'> M0I 3650 0.0
+        <option value='M2I'> M2I 3600 0.0
+       </select> [Sp Teff log(g) log(z)=0]
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <input TYPE="RADIO" NAME="fsorigin" value="SpectrumPickles" id='fsorigin_SpectrumPickles' onclick='set_nonempty_continuum(this.form)'>
+    </td>
+    <td>
+        <a HREF="/etc/help/picklesSpectra" target="_etcHelp">Pickles Models</a>:
+        <select NAME="fSpectrumPickles" onfocus="set_radio('fsorigin_SpectrumPickles')">
+            <option value="O5V" SELECTED>O5V 39810.7K
+            <option value="O9V">O9V 35481.4K
+            <option value="B0V">B0V 28183.8K
+            <option value="B1V">B1V 22387.2K
+            <option value="B3V">B3V 19054.6K
+            <option value="B57V">B5-7V 14125.4K
+            <option value="B8V">B8V 11749.0K
+            <option value="A0V">A0V 9549.93K
+            <option value="A2V">A2V 8912.51K
+            <option value="A3V">A3V 8790.23K
+            <option value="A5V">A5V 8491.80K
+            <option value="F0V">F0V 7211.08K
+            <option value="F2V">F2V 6776.42K
+            <option value="F5V">F5V 6531.31K
+            <option value="F8V">F8V 6039.48K
+            <option value="G0V">G0V 5807.64K
+            <option value="G2V">G2V 5636.38K
+            <option value="G5V">G5V 5584.70K
+            <option value="G8V">G8V 5333.35K
+            <option value="K0V">K0V 5188.00K
+            <option value="K2V">K2V 4886.52K
+            <option value="K5V">K5V 4187.94K
+            <option value="K7V">K7V 3999.45K
+            <option value="M0V">M0V 3801.89K
+            <option value="M2V">M2V 3548.13K
+            <option value="M4V">M4V 3111.72K
+            <option value="M5V">M5V 2951.21K
+            <option value="B2IV">B2IV 19952.6K
+            <option value="B6IV">B6IV 12589.3K
+            <option value="A0IV">A0IV 9727.47K
+            <option value="A47IV">A4-7IV 7943.28K
+            <option value="F02IV">F0-2IV 7030.72K
+            <option value="F5IV">F5IV 6561.45K
+            <option value="F8IV">F8IV 6151.77K
+            <option value="G0IV">G0IV 5929.25K
+            <option value="G2IV">G2IV 5688.53K
+            <option value="G5IV">G5IV 5597.57K
+            <option value="G8IV">G8IV 5308.84K
+            <option value="K0IV">K0IV 5011.87K
+            <option value="K1IV">K1IV 4786.30K
+            <option value="K3IV">K3IV 4570.88K
+            <option value="O8III">O8III 31622.8K
+            <option value="B12III">B1-2III 19952.6K
+            <option value="B5III">B5III 14791.1K
+            <option value="B9III">B9III 11091.8K
+            <option value="A0III">A0III 9571.94K
+            <option value="A5III">A5III 8452.79K
+            <option value="F0III">F0III 7585.78K
+            <option value="F5III">F5III 6531.31K
+            <option value="G0III">G0III 5610.48K
+            <option value="G5III">G5III 5164.16K
+            <option value="G8III">G8III 5011.87K
+            <option value="K0III">K0III 4852.89K
+            <option value="K3III">K3III 4365.16K
+            <option value="K5III">K5III 4008.67K
+            <option value="M0III">M0III 3819.44K
+            <option value="M5III">M5III 3419.79K
+            <option value="M10III">M10III 2500.35K
+            <option value="B2II">B2II 15995.6K
+            <option value="B5II">B5II 12589.3K
+            <option value="F0II">F0II 7943.28K
+            <option value="F2II">F2II 7328.25K
+            <option value="G5II">G5II 5248.07K
+            <option value="K01II">K0-1II 5011.87K
+            <option value="K34II">K3-4II 4255.98K
+            <option value="M3II">M3II 3411.93K
+            <option value="B0I">B0I 26001.6K
+            <option value="B5I">B5I 13396.8K
+            <option value="B8I">B8I 11194.4K
+            <option value="A0I">A0I 9727.47K
+            <option value="F0I">F0I 7691.30K
+            <option value="F5I">F5I 6637.43K
+            <option value="F8I">F8I 6095.37K
+            <option value="G0I">G0I 5508.08K
+            <option value="G5I">G5I 5046.61K
+            <option value="G8I">G8I 4591.98K
+            <option value="K2I">K2I 4255.98K
+            <option value="K4I">K4I 3990.25K
+            <option value="M2I">M2I 3451.44K
+        </select> (Sp Teff)
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <input TYPE="RADIO" NAME="fsorigin" value="SpectrumKurucz" id='fsorigin_SpectrumKurucz' onclick='set_nonempty_continuum(this.form)'>
+    </td>
+    <td>
+        <a HREF="/etc/help/spectra#kurucz-models" target="_etcHelp">Kurucz Models</a>:
+        <select NAME="fbpgsfile" onfocus='set_radio("fsorigin_SpectrumKurucz")'>
+            <option value="O5V" SELECTED>O5V 44500 5.0
+            <option value="O7V">O7V 38000 4.5
+            <option value="O9V">O9V 33000 4.0
+            <option value="B0V">B0V 30000 4.0
+            <option value="B1V">B1V 25400 3.9
+            <option value="B3V">B3V 18700 3.9
+            <option value="B5V">B5V 15400 3.9
+            <option value="B8V">B8V 11900 4.0
+            <option value="A1V">A1V 9230 4.1
+            <option value="A3V">A3V 8720 4.2
+            <option value="A5V">A5V 8200 4.3
+            <option value="F0V">F0V 7200 4.3
+            <option value="F2V">F2V 6890 4.3
+            <option value="F5V">F5V 6440 4.3
+            <option value="F8V">F8V 6200 4.4
+            <option value="G2V">G2V 5860 4.4
+            <option value="G5V">G5V 5770 4.5
+            <option value="G8V">G8V 5570 4.5
+            <option value="K0V">K0V 5250 4.5
+            <option value="K4V">K4V 4560 4.5
+            <option value="K7V">K7V 4060 4.5
+            <option value="M2V">M2V 3500 4.6
+            <option value="F0I">F0I 7700 1.7
+            <option value="G5I">G5I 4850 1.1
+        </select>
+    </td>
+</tr>
+
+
+<tr>
+    <td>
+        <input TYPE="RADIO" NAME="fsorigin" value="SpectrumStellar" id='fsorigin_SpectrumStellar' onclick='set_nonempty_continuum(this.form)'>
+    </td>
+
+    <td>
+        <a HREF="/etc/help/spectra#bruzual-spectra" target="_etcHelp">Bruzual Synthetic Stellar Spectra</a>:
+        <select NAME="fStellar" onfocus='set_radio("fsorigin_SpectrumStellar")'>
+            <Option VALUE="O5_V" SELECTED>O5 V
+            <Option VALUE="O7_V">O7 V
+            <Option VALUE="O8_V">O8 V
+            <Option VALUE="O9_V">O9 V
+            <Option VALUE="B0_V">B0 V
+            <Option VALUE="B1_V">B1 V
+            <Option VALUE="B2_V">B2 V
+            <Option VALUE="B3_V">B3 V
+            <Option VALUE="B5_V">B5 V
+            <Option VALUE="B7_V">B7 V
+            <Option VALUE="B8_V">B8 V
+            <Option VALUE="B9_V">B9 V
+            <Option VALUE="A0_V">A0 V
+            <Option VALUE="A1_V">A1 V
+            <Option VALUE="A2_V">A2 V
+            <Option VALUE="A3_V">A3 V
+            <Option VALUE="A5_V">A5 V
+            <Option VALUE="A7_V">A7 V
+            <Option VALUE="F2_V">F2 V
+            <Option VALUE="F5_V">F5 V
+            <Option VALUE="F6_V">F6 V
+            <Option VALUE="F7_V">F7 V
+            <Option VALUE="F8_V">F8 V
+            <Option VALUE="G0_V">G0 V
+            <Option VALUE="G1_V">G1 V
+            <Option VALUE="G2_V">G2 V
+            <Option VALUE="G5_V">G5 V
+            <Option VALUE="K0_V">K0 V
+            <Option VALUE="K3_V">K3 V
+            <Option VALUE="K5_V">K5 V
+            <Option VALUE="K9_V">K9 V
+            <Option VALUE="M0_V">M0 V
+            <Option VALUE="M1_V">M1 V
+            <Option VALUE="M2_V">M2 V
+            <Option VALUE="M6_V">M6 V
+            <Option VALUE="O8_III">O8 III
+            <Option VALUE="O9_III">O9 III
+            <Option VALUE="B0.5_III">B0.5 III
+            <Option VALUE="B1_III">B1 III
+            <Option VALUE="B2_III">B2 III
+            <Option VALUE="B5_III">B5 III
+            <Option VALUE="B7_III">B7 III
+            <Option VALUE="B8_III">B8 III
+            <Option VALUE="B9.5_III">B9.5 III
+            <Option VALUE="A0_III">A0 III
+            <Option VALUE="A2_III">A2 III
+            <Option VALUE="A3_III">A3 III
+            <Option VALUE="A5_III">A5 III
+            <Option VALUE="A7_III">A7 III
+            <Option VALUE="F0_III">F0 III
+            <Option VALUE="G0_III">G0 III
+            <Option VALUE="G8_III">G8 III
+            <Option VALUE="G9_III">G9 III
+            <Option VALUE="K0_III">K0 III
+            <Option VALUE="K2_III">K2 III
+            <Option VALUE="K5_III">K5 III
+            <Option VALUE="K6_III">K6 III
+            <Option VALUE="M0_III">M0 III
+            <Option VALUE="M1_III">M1 III
+            <Option VALUE="M3_III">M3 III
+            <Option VALUE="M4_III">M4 III
+            <Option VALUE="M5_III">M5 III
+            <Option VALUE="M6_III">M6 III
+            <Option VALUE="O7_I">O7 I
+            <Option VALUE="O9.5_I">O9.5 I
+            <Option VALUE="B0_I">B0 I
+            <Option VALUE="B0.5_I">B0.5 I
+            <Option VALUE="B5_I">B5 I
+            <Option VALUE="B8_I">B8 I
+            <Option VALUE="A2_I">A2 I
+            <Option VALUE="F0_I">F0 I
+            <Option VALUE="F2_I">F2 I
+            <Option VALUE="F8_I">F8 I
+            <Option VALUE="G0_I">G0 I
+            <Option VALUE="G2_I">G2 I
+            <Option VALUE="G8_I">G8 I
+            <Option VALUE="M1M2_I">M1M2 I
+        </select>
+    </td>
+</tr>
+
+
+
+    <tr>
+        <td>
+            <input TYPE="RADIO" NAME="fsorigin" value="SpectrumHST" id='fsorigin_SpectrumHST' onclick='set_nonempty_continuum(this.form)'>
+        </td>
+        <td>
+            <a HREF="/etc/help/spectra#hst-standard-star-spectra" target="_etcHelp">HST Standard Star spectra</a>:
+            <select NAME="fcalfile" onfocus='set_radio("fsorigin_SpectrumHST")'>
+                <option VALUE="AGK+81D266">AGK+81&deg;266 (sdO, 11.94) [1148.6, 24955.1 &Aring]
+                <option VALUE="BD+17D4708">BD+17&deg;4708 (sdF8, 9.47) [1710.56, 24787.4 &Aring]
+                <option VALUE="BD+28D4211">BD+28&deg;4211 (Op, 10.51) [1140.6, 10242.7 &Aring]
+                <option VALUE="BD+75D325">BD+75&deg;325 (O5p, 9.55) [1140.6, 10221.5 &Aring]
+                <option VALUE="Feige34">Feige 34 (DO,11.18) [1148.6, 10242.6 &Aring]
+                <option VALUE="Feige110">Feige 110 (D0p, 11.83) [1148.6, 24999.5 &Aring]
+                <option value="GD50">GD50 (DA2, 14.06) [1148.6, 9202.53 &Aring]
+                <option value="GD71">GD71 (DA1, 13.032) [1.0, 400109.0 &Aring]
+                <option value="GD108">GD108 (sdB?,13.56) [1148.6, 9202.53 &Aring
+                <option value="GD153">GD153 (DA1, 13.346) [1.0, 400109.0 &Aring]
+                <option VALUE="Grw+70D5824">Grw+70&deg;5824 (DA3, 12.77) [1140.56, 24976.7 &Aring]
+                <option value="G191B2B">G191B2B (DA0, 11.781) [100.0, 400104.0 &Aring]
+                <option value="HZ21">HZ21 (DO2, 14.69) [1140.27, 10238.1 &Aring]
+                <option value="HZ43">HZ43 (DA, 12.91) [1.0, 400109.0 &Aring]
+                <option value="HZ44">HZ44 (sdO,11.67) [1140.6, 10240.9 &Aring]
+                <option value="LB227">LB227 (DA4, 15.32) [1148.6, 9202.53 &Aring]
+                <option value="LDS749B">LDS749B (DB4, 14.68) [900.0, 300000.0 &Aring]
+                <option VALUE="NGC7293">NGC 7293 (1.4e5K star, 13.53) [1148.6, 9202.53 &Aring]
+                <option VALUE="P330E">P330E (G2V, 12.92) [2001.54, 400000.0]
+                <option VALUE="Solar">Solar Spectrum (G2V, -26.75) [1195.0, 26957.4 &Aring]
+                <option VALUE="Sirius">Sirius (A2V, -1.46) [900.5, 2.997e6 &Aring]
+                <option VALUE="VB8">VB8 (M7V, 16.70) [2908.57, 24977.2]
+                <option VALUE="Vega">Vega [900.452, 2.99954e+06]
+                <option VALUE="WD1657+343">WD1657+343 (DAI, 16.1) [900.0, 300000.0]
+                <option VALUE="WD0308-565"> WD0308-565 (sdB D, 14.07)  [900.0, 400000.0 &Aring]
+				<option VALUE="WD0947+857">WD0947+857 (DA, 16.4) [1140.35, 5694.05 &Aring]
+				<option VALUE="WD1057+719">WD1057+719 (DA1.2, 14.8) [900.0, 300000.0 &Aring]
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <input TYPE="RADIO" NAME="fsorigin" VALUE="SpectrumNonStellar" id='fsorigin_SpectrumNonStellar' onclick='set_nonempty_continuum(this.form)'>
+        </td>
+        <td>
+            <a HREF="/etc/help/spectra#non-stellar-objects" target="_etcHelp">Non-Stellar Objects</a>:
+            <select NAME="fnonstellar" onfocus='set_radio("fsorigin_SpectrumNonStellar")'>
+	 	        <option VALUE="Gliese 229B"         > Dwarf Gliese 229B [8374.72, 49539.17 &Aring;]
+	 	        <option VALUE="Gliese 752B"         > Dwarf Gliese 752B [5626.15, 41523.5 &Aring;]
+	 	        <option VALUE="Gliese 411"          > Dwarf Gliese 411 [6338.44, 49007.7 &Aring;]
+	 	        <option VALUE="Gliese 406"          > Dwarf Gliese 406 [6339.82, 49007.7 &Aring;]
+	 	        <option VALUE="Orion"               > Orion Nebula [1150.7, 8000.0 &Aring;]
+	 	        <option VALUE="Orion2"              > Orion Nebula II [1000.0, 11000.0 &Aring;]
+	 	        <option VALUE="PN"                  > Planetary Nebula [1000.0, 11000.0 &Aring;]
+                <option VALUE="QSO"                 > QSO (LBQS based) [800, 6000 &Aring; (z=0)]
+                <option VALUE="QSO2"                > QSO (FOS based) [100, 3387 &Aring; (z=0)]
+				<option VALUE="QSO SDSS"			> QSO (SDSS based) [800, 8554.5 &Aring; (z=0)]
+				<option VALUE="QSO IRTF"			> QSO (IRTF based) [5801, 35095.4 &Aring; (z=0)]
+	 	        <option VALUE="NGC1068"             > Type-2 Seyfert Galaxy NGC1068 [1000.0, 11000.0 &Aring;]
+                <option VALUE="Elliptical"          SELECTED> Elliptical Galaxy with a strong UV upturn [240, 34000 &Aring;]
+	 	        <option VALUE="Elliptical2"         > Elliptical Galaxy [1400.0, 27480.0 &Aring;]
+                <option VALUE="El B2004a"           > Elliptical Benitez 2004a [911.0, 25600.0 &Aring;]
+                <option VALUE="El CWW FUV"          > Elliptical CWW FUV [500.0, 25600.0 &Aring;]
+                <option VALUE="Im B2004a"           > Irregular (Im) CWW [911.0, 25600.0 &Aring;]
+	 	        <option VALUE="Spiral"              > Spiral Galaxy [260.0, 34000.0 &Aring;]
+                <option VALUE="S0 FUV CWW"          > Spiral S0 CWW FUV [1.0, 25999.0 &Aring;]
+                <option VALUE="Sa FUV CWW"          > Spiral Sa CWW FUV [1.0, 25999.0 &Aring;]
+                <option VALUE="Sbc B2004a"          > Spiral Sbc Benitez 2004a [911.0, 25600.0 &Aring;]
+                <option VALUE="Sbc CWW"             > Spiral Sbc CWW [500.0, 25600.0 &Aring;]
+                <option VALUE="Scd B2004a"          > Spiral Scd Benitez 2004a [910.0, 25600.0 &Aring;]
+                <option VALUE="SSP 25myr z008"      > SSP 25 Myr Z=0.08 BC [227.0, 1600000.0 &Aring;]
+                <option VALUE="SSP 5myr z008"       > SSP 5 Myr Z=0.08 BC [91.0, 1600000.0 &Aring;]
+                <option VALUE="Tau06 z02 1015 190"  > BC 2003 Z=0.2 Tau = 0.6 age = 1.01519 Gyr [91.0, 1600000.0 &Aring;]
+                <option VALUE="Tau06 z02 2500 000"  > BC 2003 Z=0.2 Tau = 0.6 age = 2.5 Gyr [91.0, 1600000.0 &Aring;]
+                <option VALUE="Tau06 z02 4500 000"  > BC 2003 Z=0.2 Tau = 0.6 age = 4.5 Gyr [91.0, 1600000.0 &Aring;]
+                <option VALUE="Tau06 z02 5000 000"  > BC 2003 Z=0.2 Tau = 0.6 age = 5.0 Gyr [91.0, 1600000.0 &Aring;]
+                <option VALUE="Tau06 z02 6000 000"  > BC 2003 Z=0.2 Tau = 0.6 age = 6.0 Gyr [91.0, 1600000.0 &Aring;]
+                <option VALUE="Tau06 z02 8000 000"  > BC 2003 Z=0.2 Tau = 0.6 age = 8.0 Gyr [91.0, 1600000.0 &Aring;]
+                <option VALUE="Tau06 z02 12000 000" > BC 2003 Z=0.2 Tau = 0.6 age = 12.0 Gyr [91.0, 1600000.0 &Aring;]
+                <option VALUE="Sb1 Kinney FUV"      > Starburst SB1 Kinney FUV [500.0, 25598.0 &Aring;]
+                <option VALUE="Sb2 B2004a"          > Starburst SB2 Kinney Recalibrated [911.0, 25592.0 &Aring;]
+                <option VALUE="Sb2 Kinney FUV"      > Starburst SB2 Kinney FUV [500.0, 25592.0 &Aring;]
+                <option VALUE="Sb3 B2004a"          > Starburst SB3 Kinney Recalibrated [911.0, 25596.0 &Aring;]
+                <option VALUE="Sb3 Kinney FUV"      > Starburst SB3 Kinney FUV [500.0, 25596.0 &Aring;]
+                <option VALUE="Sb4 Kinney FUV"      > Starburst SB4 Kinney FUV [300.0, 25596.0 &Aring;]
+                <option VALUE="Sb5 Kinney FUV"      > Starburst SB5 Kinney FUV [300.0, 25590.0 &Aring;]
+                <option VALUE="Sb6 Kinney FUV"      > Starburst SB6 Kinney FUV [100.0, 25596.0 &Aring;]
+                <option VALUE="ULIRG05189-2524"     > Ultra Luminous IR Galaxy IRAS05189-2524 [0.1, 977.2372 um]
+                <option VALUE="ULIRG12112+0305"     > Ultra Luminous IR Galaxy IRAS12112+0305 [0.1, 977.2372 um]
+                <option VALUE="ULIRG14348+1447"     > Ultra Luminous IR Galaxy IRAS14348-1447 [0.1, 977.2372 um]
+                <option VALUE="ULIRG15250+3609"     > Ultra Luminous IR Galaxy IRAS15250+3609 [0.1, 977.2372 um]
+                <option VALUE="JWIRAS22491-1808"    > Ultra Luminous IR Galaxy IRAS22491-1808 [0.1, 977.2372 um]
+                <option VALUE="ARP220"              > Merger ARP220 [0.1, 977.2372 um]
+                <option VALUE="SB_M82"              > Merger M82 [0.1, 977.2372 um]
+                <option VALUE="MRK_1014"            > Ultra Luminous IR QSO MRK1014 [0.1, 977.2372 um]
+                <option VALUE="MRK_231"             > Type-1 Seyfert Galaxy MRK231 [0.1, 977.2372 um]
+                <option VALUE="MRK_273"             > Merger MRK273 [0.1, 977.2372 um]
+                <option VALUE="MRK_463"             > Ultra Luminous IR Galaxy MRK463 [0.1, 977.2372 um]
+                <option VALUE="NGC6240"             > Ultra Luminous IR Galaxy (merger) NGC6240 [0.1, 977.2372 um]
+                <option VALUE="UGC5101"             > Peculiar Galaxy UGC5101 [0.1, 977.2372 um]
+            </select>
+        </td>
+    </tr>
+
+    <script type="text/javascript">
+validatable_fields['fbbtemp'] = validate_float;
+validatable_fields['fIndex'] = validate_float;
+</script>
+
+<tr>
+    <td>
+        <input TYPE="RADIO" NAME="fsorigin" value="SpectrumBlackBody" id='fsorigin_SpectrumBlackBody' onclick='set_nonempty_continuum(this.form)'>
+    </td>
+    <td>
+        <label for='fsorigin_SpectrumBlackBody'> a Black-body with temperature T = </label>
+	<input name="fbbtemp" value=10000 size=8 onchange="validate(this.form,event)" onfocus='set_radio("fsorigin_SpectrumBlackBody")'>
+	<span class="error" id="fe_fbbtemp"></span>
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <input TYPE="RADIO" NAME="fsorigin" value="SpectrumPowerLaw" id='fsorigin_SpectrumPowerLaw' onclick='set_nonempty_continuum(this.form)'>
+    </td>
+    <td>
+	<label for='fsorigin_SpectrumPowerLaw'>
+        a Power-law: <em>F&lambda; = &lambda; ** </em>
+	</label>
+        <input NAME="fIndex" VALUE=-1 SIZE=5 onchange="validate(this.form,event)" onfocus='set_radio("fsorigin_SpectrumPowerLaw")'>
+	<span class="error" id="fe_fIndex"></span>
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <input TYPE="RADIO" NAME="fsorigin" value="SpectrumFlat" CHECKED id='fsorigin_SpectrumFlat' onclick='set_nonempty_continuum(this.form)'>
+    </td>
+    <td>
+	<label for='fsorigin_SpectrumFlat'>
+        a Flat continuum in
+	</label>
+	<select NAME="fIsLambda" onfocus='set_radio("fsorigin_SpectrumFlat")'>
+		<option VALUE="true">F &lambda;
+		<option VALUE="false">F &nu;
+	</select>
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <input TYPE="RADIO" NAME="fsorigin" value="SpectrumEmpty" id="fsorigin_SpectrumEmpty" onclick='validate_continuum(this.form)' >
+    </td>
+    <td>
+	<label for='fsorigin_SpectrumEmpty'>
+        No continuum. <em>If selected,
+
+        
+        at least one emission line must be specified below;
+        
+
+        the reference wavelength from part 2 above must correspond to one of the lines; and
+        <b>no extinction, redshift, or renormalization may be applied</b>.</em>
+	</label>
+    </td>
+</tr>
+
+
+</table>
+
+
+
+        <script type="text/javascript">
+validatable_fields['febv'] = validate_ebv;
+validatable_fields['fRedshift'] = validate_redshift;
+</script>
+
+<p>
+Specify the extinction <a HREF="/etc/help/extinction" target="_etcHelp">E(<i>B-V</i>)</a>
+<select NAME="febmvtype">
+    <option VALUE="mwavg" SELECTED> Milky Way Diffuse (Rv=3.1) [1000-22222 Angstroms]
+    <option VALUE="mwdense"> Milky Way Dense (Rv=5.0) [1000-22222 Angstroms]
+    <option VALUE="mwrv21"> Milky Way CCM (Rv=2.1) [912-50000 Angstroms]
+    <option VALUE="mwrv4"> Milky Way CCM (Rv=4.0) [912-50000 Angstroms]
+    <option VALUE="lmcavg"> LMC Average (Rv=3.41) [998-21978 Angstroms]
+    <option VALUE="lmc30dor"> LMC2Supershell (Rv=2.76) [998-21978 Angstroms]
+    <option VALUE="smcbar"> SMC Bar (Rv=2.74) [998-21978 Angstroms]
+    <option VALUE="xgalsb"> Starburst (attenuation law) [912-21997 Angstroms]
+
+</select> = 
+        <input NAME="febv" value=0.0 size=6 onchange="validate(this.form,event)">
+        <span class="error" id="fe_febv"></span>
+
+<br>
+
+<p>
+Extinction applied
+<select NAME="fextinctiontype">
+    <option VALUE="before" SELECTED> before
+	<option VALUE="after"> after
+</select> normalization.
+
+<br>
+
+<p>
+Specify the <a href="/etc/help/redshift" target="_etcHelp">redshift</a> z = 
+	<input NAME="fRedshift" value=0.0 size=6 onchange="validate(this.form,event)">
+	<span class="error" id="fe_fRedshift"></span>
+<br>
+
+
+        <script type="text/javascript">
+validatable_fields['fL1_center']=validate_float;
+validatable_fields['fL1_fwhm']=validate_float;
+validatable_fields['fL1_flux']=validate_float;
+validatable_fields['fL2_center']=validate_float;
+validatable_fields['fL2_fwhm']=validate_float;
+validatable_fields['fL2_flux']=validate_float;
+validatable_fields['fL3_center']=validate_float;
+validatable_fields['fL3_fwhm']=validate_float;
+validatable_fields['fL3_flux']=validate_float;
+</script>
+
+
+<br/>
+<br/>
+Add emission lines to the input spectrum (optional):
+<em class="warning"> <font color="#E67700">
+    <strong>
+    Note: emission lines are added *after* the spectrum has had extinction, renormalization, and redshift applied.
+    </strong>
+</font></em>
+<table BORDER="0" CELLPADDING="2" CELLSPACING="5">
+<tr>
+<th>Line Center</th>
+<th>FWHM</th>
+<th>Integrated Flux</th>
+</tr>
+<tr>
+<th>Å</th>
+<th>&Aring;</th>
+<th>(erg/cm<sup>2</sup>/s)</th>
+</tr>
+    <tr>
+        <th>(vacuum)</th>
+        <th />
+        <th />
+    </tr>
+
+    <tr>
+        <td><input NAME="fL1_center" VALUE=0. SIZE=7 onchange="validate(this.form,event)">
+	    <span class="error" id="fe_fL1_center"></span>
+	</td>
+        <td><input NAME="fL1_fwhm" VALUE=0. SIZE=8 onchange="validate(this.form,event)">
+	    <span class="error" id="fe_fL1_fwhm"></span>
+	</td>
+        <td><input NAME="fL1_flux" VALUE=0. SIZE=8 onchange="validate(this.form,event)">
+	    <span class="error" id="fe_fL1_flux"></span>
+	</td>
+    </tr>
+<tr>
+	<td><input NAME="fL2_center" VALUE=0. SIZE=7 onchange="validate(this.form,event)">
+	    <span class="error" id="fe_fL2_center"></span>
+	</td>
+	<td><input NAME="fL2_fwhm" VALUE=0. SIZE=8 onchange="validate(this.form,event)">
+	    <span class="error" id="fe_fL2_fwhm"></span>
+	</td>
+	<td><input NAME="fL2_flux" VALUE=0. SIZE=8 onchange="validate(this.form,event)">
+	    <span class="error" id="fe_fL2_flux"></span>
+	</td>
+</tr>
+<tr>
+	<td><input NAME="fL3_center" VALUE=0. SIZE=7 onchange="validate(this.form,event)">
+	    <span class="error" id="fe_fL3_center"></span>
+	</td>
+	<td><input NAME="fL3_fwhm" VALUE=0. SIZE=8 onchange="validate(this.form,event)">
+	    <span class="error" id="fe_fL3_fwhm"></span>
+	</td>
+	<td><input NAME="fL3_flux" VALUE=0. SIZE=8 onchange="validate(this.form,event)">
+	    <span class="error" id="fe_fL3_flux"></span>
+	</td>
+</tr>
+</table>
+<p>
+    Note: integrated flux units are per arcsec<sup>2</sup> for extended sources.
+    <em>All three of the parameters (line center, fwhm and integrated flux) must be specified
+    for an emission line to be included.</em>
+</p>
+
+
+        <!--  Question 4 -->
+
+        <h3>4. <a href="/etc/help/normalize" target="_etcHelp">Normalize</a> the target's flux: </h3>
+
+        <script type="text/javascript">
+validatable_fields['rn_flux_lambda']=validate_float;
+validatable_fields['rn_lambda']=validate_float;
+validatable_fields['rn_flux_bandpass']=validate_float;
+</script>
+
+<table>
+
+<tr ALIGN=LEFT>
+    <td>
+        <input TYPE="RADIO" NAME="fftype" VALUE="fnormalize.lambda" id='fftype_fnormalize_lambda'>
+    </td>
+    <td>
+        <input NAME="rn_flux_lambda" VALUE=1.5e-13 SIZE=10 onchange="validate(this.form,event)" onfocus='set_radio("fftype_fnormalize_lambda")'>
+    	<span class="error" id="fe_rn_flux_lambda"></span>
+        <select NAME="rn_flux_lambda_units" onfocus='set_radio("fftype_fnormalize_lambda")'>
+            <option SELECTED VALUE="flam"> <em>erg / cm^2 / s / &Aring;</em>
+            <option VALUE="jy"> <em>Jy (1.E<sup>-23</sup> erg / cm^2 / s / Hz)</em>
+            <option VALUE="abmag"> <em>AB magnitude</em>
+        </select>
+        (arcsec<sup>-2</sup> for extended sources) at
+        <input NAME="rn_lambda" VALUE="5500" SIZE=8 onchange="validate(this.form,event)" onfocus='set_radio("fftype_fnormalize_lambda")'>
+        <span class="error" id="fe_rn_lambda"></span>
+        <select NAME="rn_lambda_units" id='selectable_units' onfocus='set_radio("fftype_fnormalize_lambda")'>
+            <option  SELECTED  VALUE="angstroms"> <em>&Aring;</em>
+            <option VALUE="nanometers"> <em>nm</em>
+            <option VALUE="microns"> <em>&mu;m</em>
+        </select>
+    </td>
+</tr>
+
+<tr ALIGN=LEFT>
+    <td>
+        <input TYPE="RADIO" CHECKED NAME="fftype" VALUE="fnormalize.bandpass" id='fftype_fnormalize_bandpass'>
+    </td>
+    <td>
+        <input NAME="rn_flux_bandpass" VALUE=15 SIZE=10 onchange="validate(this.form,event)" onfocus='set_radio("fftype_fnormalize_bandpass")'>
+    	<span class="error" id="fe_rn_flux_bandpass"></span>
+        <select NAME="rn_flux_bandpass_units" onfocus='set_radio("fftype_fnormalize_bandpass")'>
+            <option SELECTED VALUE="vegamag"> <em>Vega magnitude</em>
+            <option VALUE="abmag"> <em>AB magnitude</em>
+            <option VALUE="jy"> <em>Jy (1.E<sup>-23</sup> erg / cm^2 / s / Hz)</em>
+            <option VALUE="flam"> <em>erg / cm^2 / s / &Aring;</em>
+        </select>
+        (arcsec<sup>-2</sup> for extended sources) in filter:
+    </td>
+</tr>
+
+<table style="margin-left:20px;">
+
+<tr ALIGN=LEFT>
+    <td>
+        <input TYPE="RADIO" NAME="fftype_filters" VALUE="fNormalizeByFilter.observation" id='fftype_fNormalizeByFilter.observation'
+        onclick='set_radio("fftype_fnormalize_bandpass")'>
+    </td>
+    <td>
+        
+        Filter
+        
+        selected above in Question 1 (for observations)
+    </td>
+</tr>
+
+<tr ALIGN=LEFT>
+    <td>
+        <input TYPE="RADIO" CHECKED NAME="fftype_filters" VALUE="fNormalizeByFilter.ubvri" id='fftype_fNormalizeByFilter.ubvri'
+        onclick='set_radio("fftype_fnormalize_bandpass")'>
+    </td>
+    <td>
+        <select NAME="filter.ubvri" onfocus='set_radio("fftype_fNormalizeByFilter.ubvri"),set_radio("fftype_fnormalize_bandpass")'>
+            <option VALUE="Johnson/U"> Johnson/U
+            <option VALUE="Johnson/B"> Johnson/B
+            <option SELECTED VALUE="Johnson/V"> Johnson/V
+            <option VALUE="Johnson/R"> Johnson/R
+            <option VALUE="Johnson/I"> Johnson/I
+            <option VALUE="Johnson/J"> Johnson/J
+            <option VALUE="Johnson/K"> Johnson/K
+            <option VALUE="Bessell/H"> Bessell/H
+            <option VALUE="Bessell/K"> Bessell/K
+            <option VALUE="Bessell/J"> Bessell/J
+            <option VALUE="Cousins/R"> Cousins/R
+            <option VALUE="Cousins/I"> Cousins/I
+        </select> (magnitudes typically reported as Vega)
+    </td>
+</tr>
+
+<tr ALIGN=LEFT>
+    <td>
+        <input TYPE="RADIO" NAME="fftype_filters" VALUE="fNormalizeByFilter.sloan" id='fftype_fNormalizeByFilter.sloan'
+        onclick='set_radio("fftype_fnormalize_bandpass")'>
+    </td>
+    <td>
+        <select NAME="filter.sloan" onfocus='set_radio("fftype_fNormalizeByFilter.sloan"),set_radio("fftype_fnormalize_bandpass")'>
+            <option VALUE="Galex/NUV"> Galex/NUV
+            <option VALUE="Galex/FUV"> Galex/FUV
+            <option VALUE="Sloan/U"> Sloan/U
+            <option VALUE="Sloan/G"> Sloan/G
+            <option SELECTED VALUE="Sloan/R"> Sloan/R
+            <option VALUE="Sloan/I"> Sloan/I
+            <option VALUE="Sloan/Z"> Sloan/Z
+        </select> (magnitudes typically reported as AB)
+    </td>
+</tr>
+
+<tr ALIGN=LEFT>
+    <td>
+        <input TYPE="RADIO" NAME="fftype_filters" VALUE="fNormalizeByFilter.nicmos" id='fftype_fNormalizeByFilter.nicmos'
+        onclick='set_radio("fftype_fnormalize_bandpass")'>
+    </td>
+    <td>
+        <select NAME="filter.nicmos" onfocus='set_radio("fftype_fNormalizeByFilter.nicmos"),set_radio("fftype_fnormalize_bandpass")'>
+            <option SELECTED VALUE="NICMOS/F110W"> NICMOS/F110W
+            <option VALUE="NICMOS/F160W"> NICMOS/F160W
+        </select>
+    </td>
+</tr>
+
+<tr ALIGN=LEFT>
+    <td>
+        <input TYPE="RADIO" NAME="fftype_filters" VALUE="fNormalizeByFilter.acs" id='fftype_fNormalizeByFilter.acs'
+        onclick='set_radio("fftype_fnormalize_bandpass")'>
+    </td>
+    <td>
+        <select NAME="filter.acs" onfocus='set_radio("fftype_fNormalizeByFilter.acs"),set_radio("fftype_fnormalize_bandpass")'>
+            <option SELECTED VALUE="ACS/F435W"> ACS/F435W
+            <option VALUE="ACS/F475W"> ACS/F475W
+            <option VALUE="ACS/F555W"> ACS/F555W
+            <option VALUE="ACS/F606W"> ACS/F606W
+            <option VALUE="ACS/F625W"> ACS/F625W
+            <option VALUE="ACS/F775W"> ACS/F775W
+            <option VALUE="ACS/F814W"> ACS/F814W
+            <option VALUE="ACS/F850LP"> ACS/F850LP
+        </select>
+    </td>
+</tr>
+
+<tr ALIGN=LEFT>
+    <td>
+        <input TYPE="RADIO" NAME="fftype_filters" VALUE="fNormalizeByFilter.wfc3UVIS" id='fftype_fNormalizeByFilter.wfc3UVIS'
+        onclick='set_radio("fftype_fnormalize_bandpass")'>
+    </td>
+    <td>
+        <select NAME="filter.wfc3UVIS" onfocus='set_radio("fftype_fNormalizeByFilter.wfc3UVIS"),set_radio("fftype_fnormalize_bandpass")'>
+            <option VALUE="WFC3/UVIS/F218W"> WFC3/UVIS/F218W
+            <option VALUE="WFC3/UVIS/F200LP"> WFC3/UVIS/F200LP
+            <option VALUE="WFC3/UVIS/F225W"> WFC3/UVIS/F225W
+            <option SELECTED VALUE="WFC3/UVIS/F275W"> WFC3/UVIS/F275W
+            <option VALUE="WFC3/UVIS/F300X"> WFC3/UVIS/F300X
+            <option VALUE="WFC3/UVIS/F336W"> WFC3/UVIS/F336W
+            <option VALUE="WFC3/UVIS/F350LP"> WFC3/UVIS/F350LP
+            <option VALUE="WFC3/UVIS/F390W"> WFC3/UVIS/F390W
+            <option VALUE="WFC3/UVIS/F438W"> WFC3/UVIS/F438W
+            <option VALUE="WFC3/UVIS/F475X"> WFC3/UVIS/F475X
+            <option VALUE="WFC3/UVIS/F600LP"> WFC3/UVIS/F600LP
+        </select>
+    </td>
+</tr>
+
+<tr ALIGN=LEFT>
+    <td>
+        <input TYPE="RADIO" NAME="fftype_filters" VALUE="fNormalizeByFilter.wfc3IR" id='fftype_fNormalizeByFilter.wfc3IR'
+        onclick='set_radio("fftype_fnormalize_bandpass")'>
+    </td>
+    <td>
+        <select NAME="filter.wfc3IR" onfocus='set_radio("fftype_fNormalizeByFilter.wfc3IR"),set_radio("fftype_fnormalize_bandpass")'>
+            <option VALUE="WFC3/IR/F098M"> WFC3/IR/F098M
+            <option VALUE="WFC3/IR/F105W"> WFC3/IR/F105W
+            <option SELECTED VALUE="WFC3/IR/F110W"> WFC3/IR/F110W
+            <option VALUE="WFC3/IR/F125W"> WFC3/IR/F125W
+            <option VALUE="WFC3/IR/F140W"> WFC3/IR/F140W
+            <option VALUE="WFC3/IR/F160W"> WFC3/IR/F160W
+        </select>
+    </td>
+</tr>
+
+</table>
+
+<tr ALIGN=LEFT>
+    <td>
+        <input TYPE="RADIO" NAME="fftype" value="fno" id='fftype_fno'>
+    </td>
+    <td>
+	<label for='fftype_fno'>Do not Renormalize Point Source Spectrum.
+            <em>Use only for User Input Spectrum or Calibration Spectra.</em>
+	</label>
+    </td>
+</tr>
+
+</table>
+
+
+        <!--  Question 5 -->
+
+        <h3>5. Specify the expected <a href="/etc/help/background" target="_etcHelp">background
+            levels</a> :</h3>
+
+        
+<table BORDER="0" CELLPADDING="2" CELLSPACING="2">
+    <script type="text/javascript">
+validatable_fields['ZodiMag']=validate_float;
+validatable_fields['ZodiMult']=validate_float;
+validatable_fields['ZodiRA']=validate_ra;
+validatable_fields['ZodiDec']=validate_dec;
+validatable_fields['ZodiSun']=validate_float;
+
+</script>
+
+<tr>
+    <td>
+        <strong>a)</strong>
+    </td>
+    <td colspan=2>
+        Specify normalization for zodiacal background
+    </td>
+</tr>
+<!-- Here is the line for standard normalization (low, med, high) -->
+<tr>
+    <td>
+        <input TYPE="RADIO" NAME="ZodiSpec" VALUE="ZodiStandard" CHECKED id='ZodiSpec_ZodiStandard'>
+    </td>
+    <td>
+	<label for='ZodiSpec_ZodiStandard'>
+        Standard zodiacal light normalizations:
+	</label>
+    </td>
+    <td colspan=2>
+        <select NAME="ZodiStandard" onfocus='set_radio("ZodiSpec_ZodiStandard")' >
+            <option VALUE="None">None
+            <option VALUE="Low">Low
+            <option VALUE="Average" SELECTED>Average
+            <option VALUE="High">High
+        </select>
+    </td>
+</tr>
+
+<!-- Here we normalize by sky position. -->
+<tr>
+    <td>
+        <input TYPE="RADIO" NAME="ZodiSpec" VALUE="ZodiCoords" id='ZodiSpec_ZodiCoords'>
+    </td>
+    <td colspan=2>
+	<label for='ZodiSpec_ZodiCoords'>
+        Compute zodiacal light on sky position:
+	</label>
+    </td>
+</tr>
+<tr>
+    <td />
+    <td colspan=3>
+        R.A.: <input NAME="ZodiRA" value="00:00:00" size=12 onchange="validate(this.form,event)" onfocus='set_radio("ZodiSpec_ZodiCoords")'>
+        <span class="error" id="fe_ZodiRA"></span>
+        (hh:mm:ss or decimal degrees)
+    </td>
+</tr>
+<tr>
+    <td />
+    <td colspan=3>
+        Dec.: <input Name="ZodiDec" value="+00:00:00" size=12 onchange="validate(this.form,event)" onfocus='set_radio("ZodiSpec_ZodiCoords")'>
+        <span class="error" id="fe_ZodiDec"></span>
+        (dd:mm:ss or decimal degrees)
+    </td>
+</tr>
+<tr>
+    <td />
+    <td colspan=3>
+        <strong>either</strong>
+        <input type="radio" name="ZodiSunAttribute" value="SunAngle" id='ZodiSunAttribute_SunAngle' onfocus='set_radio("ZodiSpec_ZodiCoords")'>
+		<label for='ZodiSunAttribute_SunAngle'>
+		&lambda; - &lambda;<sub>Sun</sub>: 
+		</label>
+		<input Name="ZodiSun" value="90" size=6 onchange="validate(this.form,event)" onfocus='set_radio("ZodiSpec_ZodiCoords"); set_radio("ZodiSunAttribute_SunAngle");'>
+        <span class="error" id="fe_ZodiSun"></span>
+        degrees
+    </td>
+</tr>
+<tr>
+    <td />
+    <td colspan=3>
+        <strong>- or -</strong>
+        <input type="radio" name="ZodiSunAttribute" value="Date" CHECKED id='ZodiSunAttribute_Date' onfocus='set_radio("ZodiSpec_ZodiCoords","ZodiSunAttribute_Date")' >
+		<label for='ZodiSunAttribute_Date'>
+		 Date:
+		</label>
+        <select name="ZodiDate" onfocus='set_radio("ZodiSpec_ZodiCoords","ZodiSunAttribute_Date")' >
+            <option>1990</option>
+            <option>1991</option>
+            <option>1992</option>
+            <option>1993</option>
+            <option>1994</option>
+            <option>1995</option>
+            <option>1996</option>
+            <option>1997</option>
+            <option>1998</option>
+            <option>1999</option>
+            <option>2000</option>
+            <option>2001</option>
+            <option>2002</option>
+            <option>2003</option>
+            <option>2004</option>
+            <option>2005</option>
+            <option>2006</option>
+            <option>2007</option>
+            <option>2008</option>
+            <option SELECTED>2009</option>
+            <option>2010</option>
+            <option>2011</option>
+            <option>2012</option>
+            <option>2013</option>
+            <option>2014</option>
+            <option>2015</option>
+            <option>2016</option>
+            <option>2017</option>
+            <option>2018</option>
+            <option>2019</option>
+        </select>
+        <select name="ZodiMonth" onfocus='set_radio("ZodiSpec_ZodiCoords","ZodiSunAttribute_Date")' >
+            <option value=1>January
+            <option value=2>February
+            <option value=3>March
+            <option value=4>April
+            <option value=5>May
+            <option value=6>June
+            <option value=7>July
+            <option value=8>August
+            <option value=9>September
+            <option value=10>October
+            <option value=11>November
+            <option value=12>December
+        </select>
+        <select name="ZodiDay" onfocus='set_radio("ZodiSpec_ZodiCoords","ZodiSunAttribute_Date")' >
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+            <option>13</option>
+            <option>14</option>
+            <option>15</option>
+            <option>16</option>
+            <option>17</option>
+            <option>18</option>
+            <option>19</option>
+            <option>20</option>
+            <option>21</option>
+            <option>22</option>
+            <option>23</option>
+            <option>24</option>
+            <option>25</option>
+            <option>26</option>
+            <option>27</option>
+            <option>28</option>
+            <option>29</option>
+            <option>30</option>
+            <option>31</option>
+        </select>
+    </td>
+</tr>
+
+<!-- Here we normalize by vega magnitudes. -->
+<tr>
+    <td>
+        <input TYPE="RADIO" NAME="ZodiSpec" VALUE="ZodiMag" id='ZodiSpec_ZodiMag'>
+    </td>
+    <td>
+	<label for='ZodiSpec_ZodiMag'>
+        Normalize zodiacal light to Johnson V magnitude:
+	</label>
+    </td>
+    <td >
+        <input NAME="ZodiMag" value=30.0 size=6 onchange="validate(this.form,event)" onfocus='set_radio("ZodiSpec_ZodiMag")'>
+	<span class="error" id="fe_ZodiMag"></span>
+    </td>
+</tr>
+
+<!-- Here we normalize by a multiplier. -->
+<tr>
+    <td>
+        <input TYPE="RADIO" NAME="ZodiSpec" VALUE="ZodiMult" id='ZodiSpec_ZodiMult'>
+    </td>
+    <td>
+	<label for='ZodiSpec_ZodiMult'>
+        Scale zodiacal light by factor (1.56 = average):
+	</label>
+    </td>
+    <td colspan=2>
+        <input name="ZodiMult" value=1.0 size=6 onchange="validate(this.form,event)" onfocus='set_radio("ZodiSpec_ZodiMult");'>
+        <span class="error" id="fe_ZodiMult"></span>
+    </td>
+</tr>
+
+    <script type="text/javascript">
+validatable_fields['EarthshineMag']=validate_float;
+validatable_fields['EarthshineMult']=validate_float;
+</script>
+
+<tr>
+    <td>
+        <strong>b)</strong>
+    </td>
+    <td colspan=2>
+        Specify normalization for earth shine background
+    </td>
+</tr>
+<tr>
+    <td>
+        <input TYPE="RADIO" NAME="EarthshineSpec" VALUE="EarthshineStandard" CHECKED id='EarthshineSpec_EarthshineStandard'>
+    </td>
+    <td>
+	<label for='EarthshineSpec_EarthshineStandard'>
+        Standard earth shine light normalizations:
+	</label>
+    </td>
+        <td >
+            <select NAME="EarthshineStandard" onfocus='set_radio("EarthshineSpec_EarthshineStandard")'>
+                <option VALUE="None">None
+                <option VALUE="Average" SELECTED>Average
+                <option VALUE="High">High
+                <option VALUE="Extremely_high">Extremely High
+            </select>
+        </td>
+</tr>
+<tr>
+    <td>
+        <input TYPE="RADIO" NAME="EarthshineSpec" VALUE="EarthshineMag" id='EarthshineSpec_EarthshineMag'>
+    </td>
+    <td>
+	<label for='EarthshineSpec_EarthshineMag'>
+        Normalize earth shine light to magnitude:
+	</label>
+    </td>
+    <td >
+        <input NAME="EarthshineMag" value=30.0 size=6 onchange="validate(this.form,event)" onfocus='set_radio("EarthshineSpec_EarthshineMag")'>
+        <span class="error" id="fe_EarthshineMag"></span>
+    </td>
+</tr>
+<tr>
+    <td>
+        <input TYPE="RADIO" NAME="EarthshineSpec" VALUE="EarthshineMult" id='EarthshineSpec_EarthshineMult'>
+    </td>
+    <td>
+	<label for='EarthshineSpec_EarthshineMult'>
+        Scale earth shine light by factor (0.5 = average):
+	</label>
+    </td>
+    <td >
+        <input name="EarthshineMult" value=1.0 size=6 onchange="validate(this.form,event)" onfocus='set_radio("EarthshineSpec_EarthshineMult")'>
+        <span class="error" id="fe_EarthshineMult"></span>
+    </td>
+</tr><tr>
+</tr>
+
+
+    <tr>
+        <td>
+            <strong>c)</strong>
+        </td>
+        <td colspan=2>
+            Air Glow
+        </td>
+    </tr>
+    <tr>
+        <td />
+        <td>
+            <select NAME="AirglowStandard">
+                <option VALUE="None">No airglow (visible/IR observations)
+                <option VALUE="Low">Low
+                <option VALUE="Average" SELECTED>Average
+                <option VALUE="High">High
+            </select>
+        </td>
+    </tr>
+</table>
+
+
+
+
+        
+<!--  Submit/Reset buttons -->
+
+<script type="text/javascript">
+	document.write('<p> <input TYPE="button" value="Submit Simulation" onclick="do_submit()"> <input type="button" value="Reset All Parameters" onclick="do_reset()"> </p>');
+</script>
+<noscript> 
+	<p>
+	<!-- non-javascript here -->
+	<input TYPE="Submit" value="Submit Simulation">
+	<input type="Reset" value="Reset All Parameters">
+	</p>
+</noscript>
+
+
+
+
+<input TYPE="HIDDEN" NAME="instrument" VALUE="wfc3uvis">
+<input TYPE="HIDDEN" Name="science_mode" value="imaging">
+
+</form>
+
+
+
+</div>
+
+
+<div id="footer">
+<p>
+    If you have any questions regarding this calculator, please contact the
+    STScI Help Desk <a HREF="mailto:help@stsci.edu">(help@stsci.edu)</a>.
+    Remember to include your <a HREF="/etc/help/etcID" target="_etcHelp">ETC ID</a>
+
+</p>
+
+<a HREF="http://www.stsci.edu/institute/Copyright">Copyright Notice</a>
+
+<p>
+    <img BORDER="0" ALT="STScI" SRC="/etcstatic/images/HSTBannerSTSCI.gif"/>
+</p>
+
+</div>
+
+
+</body>
+
+</html>
