@@ -11,11 +11,12 @@ F336W=F336W[F336W>17.7]
 
 logR=-0.5*(logG-np.log10(27444)-np.log10(mass))
 spectype=["O5V","O7V","O9V","B0V","B1V","B3V","B5V","B8V","A1V","A3V","A5V","F0V","F2V","F5V","F8V","G2V","G5V","G8V","K0V","K4V","K7V","M2V"]
-temperature=[44500,38000,33000,30000,25400,18700,15400,11900,9230,8720,8200,7200,6890,6440,6200,5860,5770,5570,5250,4560,4060,3500]
+temperature=np.array([44500,38000,33000,30000,25400,18700,15400,11900,9230,8720,8200,7200,6890,6440,6200,5860,5770,5570,5250,4560,4060,3500])
+templim=(temperature[:-1]+temperature[1:])*0.5
 Te=10**logTe
-sptype=np.where(Te>temperature[0],spectype[1],spectype[0])
+sptype=np.where(Te>templim[0],spectype[0],spectype[1])
 for i in range(1,len(spectype)-1):
-    sptype=np.where(Te>temperature[i],sptype,spectype[i+1])
+    sptype=np.where(Te>templim[i],sptype,spectype[i+1])
 
 F475Xsnr=0*mass
 F555Wsnr=0*mass
